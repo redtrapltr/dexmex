@@ -1,0 +1,125 @@
+{
+  "contractName": "MexPair",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.0+commit.9e61f92b\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/MexPair.sol\":\"MexPair\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/MexPair.sol\":{\"keccak256\":\"0x79338ee2b8e199a05e8b27f1cbe29af6cb872cc99293afff2f3a328138b28122\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://feb624f3d39c2b3316d0d270cef1eb168087ed83684a532337d801af79f4939f\",\"dweb:/ipfs/QmSq5VafhoNDCKdytHU9piwim27AnNPDkfiU7vFw36cCo4\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212203d331be9c5d5efcd384d04ade582cd70bb9508a4a5aa0ec80d67cabb5208caf464736f6c63430007000033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212203d331be9c5d5efcd384d04ade582cd70bb9508a4a5aa0ec80d67cabb5208caf464736f6c63430007000033",
+  "immutableReferences": {},
+  "sourceMap": "58:24:2:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "58:24:2:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.7.0;\n\ncontract MexPair{\n    \n}",
+  "sourcePath": "/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/MexPair.sol",
+  "ast": {
+    "absolutePath": "/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/MexPair.sol",
+    "exportedSymbols": {
+      "MexPair": [
+        179
+      ]
+    },
+    "id": 180,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 178,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 179,
+        "linearizedBaseContracts": [
+          179
+        ],
+        "name": "MexPair",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 180,
+        "src": "58:24:2"
+      }
+    ],
+    "src": "33:49:2"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/MexPair.sol",
+      "exportedSymbols": {
+        "MexPair": [
+          179
+        ]
+      },
+      "license": "MIT"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 178,
+        "name": "PragmaDirective",
+        "src": "33:23:2"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            179
+          ],
+          "name": "MexPair",
+          "nodes": [
+            null
+          ],
+          "scope": 180
+        },
+        "id": 179,
+        "name": "ContractDefinition",
+        "src": "58:24:2"
+      }
+    ],
+    "id": 180,
+    "name": "SourceUnit",
+    "src": "33:49:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.0+commit.9e61f92b.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.3",
+  "updatedAt": "2021-01-19T09:56:45.585Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

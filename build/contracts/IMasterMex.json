@@ -1,0 +1,1696 @@
+{
+  "contractName": "IMasterMex",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "poolInfo",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "tokenUniPair",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "priceRatio",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "minLeverage",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "maxLeverage",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userInfo",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pending",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "debt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "groupId",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.0+commit.9e61f92b\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"poolInfo\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"tokenUniPair\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"priceRatio\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"minLeverage\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"maxLeverage\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"pending\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"debt\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"groupId\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/IMasterMex.sol\":\"IMasterMex\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/IMasterMex.sol\":{\"keccak256\":\"0x6751a7844a17a7ac289f59f7de392f777dc17fff703ef14482d13c62ffe81ebc\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://479a8b57fb77c49852e638144bb48391acd40c08f083387546456fc8186bf447\",\"dweb:/ipfs/QmeLu9QbabWtQC5PVhKKZY5TP6K2yxExyd6ydRg7uxBcWf\"]},\"@openzeppelin/contracts/GSN/Context.sol\":{\"keccak256\":\"0x8d3cb350f04ff49cfb10aef08d87f19dcbaecc8027b0bed12f3275cd12f38cf0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ded47ec7c96750f9bd04bbbc84f659992d4ba901cb7b532a52cd468272cf378f\",\"dweb:/ipfs/QmfBrGtQP7rZEqEg6Wz6jh2N2Kukpj1z5v3CGWmAqrzm96\"]},\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0xf7c39c7e6d06ed3bda90cfefbcbf2ddc32c599c3d6721746546ad64946efccaa\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cb57a28e189cd8b05748db44bdd51d608e6f1364dd1b35ad921e1bc82c10631e\",\"dweb:/ipfs/QmaWWTBbVu2pRR9XUbE4iC159NoP59cRF9ZJwhf4ghFN9i\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x3b21f2c8d626de3b9925ae33e972d8bf5c8b1bffb3f4ee94daeed7d0679036e6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7f8d45329fecbf0836ad7543330c3ecd0f8d0ffa42d4016278c3eb2215fdcdfe\",\"dweb:/ipfs/QmXWLT7GcnHtA5NiD6MFi2CV3EWJY4wv5mLNnypqYDrxL3\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.7.0;\n\nimport \"@openzeppelin/contracts/math/SafeMath.sol\";\nimport \"@openzeppelin/contracts/access/Ownable.sol\";\n\nabstract contract IMasterMex {\n    struct UserInfo {\n        uint256 amount;\n        uint256 pending;\n        uint256 debt;\n        uint8 groupId;\n    }\n\n    struct GroupInfo {\n        uint256 total;\n        uint256 deposit;\n        uint256 profit;\n        uint256 loss;\n        uint256 shareProfitPerETH;\n        uint256 extra;\n        bool hasNegativeProfit;\n    }\n\n    struct PoolInfo {\n        address tokenUniPair;\n        uint priceRatio;\n        uint8 minLeverage;\n        uint8 maxLeverage;\n        mapping(uint8 => GroupInfo) groups;\n    }\n\n    uint8 constant UP = 1;\n    uint8 constant DOWN = 0;\n    uint256 public decimals = 18;\n\n    PoolInfo public poolInfo;\n    mapping(address => UserInfo) public userInfo;\n}",
+  "sourcePath": "/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/IMasterMex.sol",
+  "ast": {
+    "absolutePath": "/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/IMasterMex.sol",
+    "exportedSymbols": {
+      "IMasterMex": [
+        56
+      ]
+    },
+    "id": 57,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:0"
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/math/SafeMath.sol",
+        "file": "@openzeppelin/contracts/math/SafeMath.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 57,
+        "sourceUnit": 2260,
+        "src": "58:51:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
+        "file": "@openzeppelin/contracts/access/Ownable.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 57,
+        "sourceUnit": 2064,
+        "src": "110:52:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 56,
+        "linearizedBaseContracts": [
+          56
+        ],
+        "name": "IMasterMex",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "IMasterMex.UserInfo",
+            "id": 12,
+            "members": [
+              {
+                "constant": false,
+                "id": 5,
+                "mutability": "mutable",
+                "name": "amount",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12,
+                "src": "225:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 4,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "225:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 7,
+                "mutability": "mutable",
+                "name": "pending",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12,
+                "src": "249:15:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 6,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "249:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 9,
+                "mutability": "mutable",
+                "name": "debt",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12,
+                "src": "274:12:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 8,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "274:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 11,
+                "mutability": "mutable",
+                "name": "groupId",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12,
+                "src": "296:13:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 10,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "296:5:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "UserInfo",
+            "nodeType": "StructDefinition",
+            "scope": 56,
+            "src": "199:117:0",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IMasterMex.GroupInfo",
+            "id": 27,
+            "members": [
+              {
+                "constant": false,
+                "id": 14,
+                "mutability": "mutable",
+                "name": "total",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 27,
+                "src": "349:13:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "349:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 16,
+                "mutability": "mutable",
+                "name": "deposit",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 27,
+                "src": "372:15:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 15,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "372:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 18,
+                "mutability": "mutable",
+                "name": "profit",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 27,
+                "src": "397:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 17,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "397:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 20,
+                "mutability": "mutable",
+                "name": "loss",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 27,
+                "src": "421:12:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 19,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "421:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 22,
+                "mutability": "mutable",
+                "name": "shareProfitPerETH",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 27,
+                "src": "443:25:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 21,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "443:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24,
+                "mutability": "mutable",
+                "name": "extra",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 27,
+                "src": "478:13:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 23,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "478:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26,
+                "mutability": "mutable",
+                "name": "hasNegativeProfit",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 27,
+                "src": "501:22:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 25,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "501:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "GroupInfo",
+            "nodeType": "StructDefinition",
+            "scope": 56,
+            "src": "322:208:0",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IMasterMex.PoolInfo",
+            "id": 40,
+            "members": [
+              {
+                "constant": false,
+                "id": 29,
+                "mutability": "mutable",
+                "name": "tokenUniPair",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 40,
+                "src": "562:20:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 28,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "562:7:0",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 31,
+                "mutability": "mutable",
+                "name": "priceRatio",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 40,
+                "src": "592:15:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 30,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "592:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 33,
+                "mutability": "mutable",
+                "name": "minLeverage",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 40,
+                "src": "617:17:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 32,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "617:5:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 35,
+                "mutability": "mutable",
+                "name": "maxLeverage",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 40,
+                "src": "644:17:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 34,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "644:5:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 39,
+                "mutability": "mutable",
+                "name": "groups",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 40,
+                "src": "671:34:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_uint8_$_t_struct$_GroupInfo_$27_storage_$",
+                  "typeString": "mapping(uint8 => struct IMasterMex.GroupInfo)"
+                },
+                "typeName": {
+                  "id": 38,
+                  "keyType": {
+                    "id": 36,
+                    "name": "uint8",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "679:5:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint8",
+                      "typeString": "uint8"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "671:27:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_mapping$_t_uint8_$_t_struct$_GroupInfo_$27_storage_$",
+                    "typeString": "mapping(uint8 => struct IMasterMex.GroupInfo)"
+                  },
+                  "valueType": {
+                    "contractScope": null,
+                    "id": 37,
+                    "name": "GroupInfo",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 27,
+                    "src": "688:9:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_GroupInfo_$27_storage_ptr",
+                      "typeString": "struct IMasterMex.GroupInfo"
+                    }
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "PoolInfo",
+            "nodeType": "StructDefinition",
+            "scope": 56,
+            "src": "536:176:0",
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 43,
+            "mutability": "constant",
+            "name": "UP",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 56,
+            "src": "718:21:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint8",
+              "typeString": "uint8"
+            },
+            "typeName": {
+              "id": 41,
+              "name": "uint8",
+              "nodeType": "ElementaryTypeName",
+              "src": "718:5:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint8",
+                "typeString": "uint8"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "31",
+              "id": 42,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "738:1:0",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_1_by_1",
+                "typeString": "int_const 1"
+              },
+              "value": "1"
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 46,
+            "mutability": "constant",
+            "name": "DOWN",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 56,
+            "src": "745:23:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint8",
+              "typeString": "uint8"
+            },
+            "typeName": {
+              "id": 44,
+              "name": "uint8",
+              "nodeType": "ElementaryTypeName",
+              "src": "745:5:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint8",
+                "typeString": "uint8"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "30",
+              "id": 45,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "767:1:0",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_0_by_1",
+                "typeString": "int_const 0"
+              },
+              "value": "0"
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "functionSelector": "313ce567",
+            "id": 49,
+            "mutability": "mutable",
+            "name": "decimals",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 56,
+            "src": "774:28:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 47,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "774:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "3138",
+              "id": 48,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "800:2:0",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_18_by_1",
+                "typeString": "int_const 18"
+              },
+              "value": "18"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "5a2f3d09",
+            "id": 51,
+            "mutability": "mutable",
+            "name": "poolInfo",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 56,
+            "src": "809:24:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_PoolInfo_$40_storage",
+              "typeString": "struct IMasterMex.PoolInfo"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 50,
+              "name": "PoolInfo",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 40,
+              "src": "809:8:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_PoolInfo_$40_storage_ptr",
+                "typeString": "struct IMasterMex.PoolInfo"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "1959a002",
+            "id": 55,
+            "mutability": "mutable",
+            "name": "userInfo",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 56,
+            "src": "839:44:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_UserInfo_$12_storage_$",
+              "typeString": "mapping(address => struct IMasterMex.UserInfo)"
+            },
+            "typeName": {
+              "id": 54,
+              "keyType": {
+                "id": 52,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "847:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "839:28:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_UserInfo_$12_storage_$",
+                "typeString": "mapping(address => struct IMasterMex.UserInfo)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 53,
+                "name": "UserInfo",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 12,
+                "src": "858:8:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_UserInfo_$12_storage_ptr",
+                  "typeString": "struct IMasterMex.UserInfo"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 57,
+        "src": "164:722:0"
+      }
+    ],
+    "src": "33:853:0"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/Volumes/Data/Work/Blockchain/defi/dexmex/contracts/IMasterMex.sol",
+      "exportedSymbols": {
+        "IMasterMex": [
+          56
+        ]
+      },
+      "license": "MIT"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "33:23:0"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 2260,
+          "absolutePath": "@openzeppelin/contracts/math/SafeMath.sol",
+          "file": "@openzeppelin/contracts/math/SafeMath.sol",
+          "scope": 57,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 2,
+        "name": "ImportDirective",
+        "src": "58:51:0"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 2064,
+          "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
+          "file": "@openzeppelin/contracts/access/Ownable.sol",
+          "scope": 57,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 3,
+        "name": "ImportDirective",
+        "src": "110:52:0"
+      },
+      {
+        "attributes": {
+          "abstract": true,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            56
+          ],
+          "name": "IMasterMex",
+          "scope": 57
+        },
+        "children": [
+          {
+            "attributes": {
+              "canonicalName": "IMasterMex.UserInfo",
+              "name": "UserInfo",
+              "scope": 56,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "overrides": null,
+                  "scope": 12,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 4,
+                    "name": "ElementaryTypeName",
+                    "src": "225:7:0"
+                  }
+                ],
+                "id": 5,
+                "name": "VariableDeclaration",
+                "src": "225:14:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "pending",
+                  "overrides": null,
+                  "scope": 12,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 6,
+                    "name": "ElementaryTypeName",
+                    "src": "249:7:0"
+                  }
+                ],
+                "id": 7,
+                "name": "VariableDeclaration",
+                "src": "249:15:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "debt",
+                  "overrides": null,
+                  "scope": 12,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 8,
+                    "name": "ElementaryTypeName",
+                    "src": "274:7:0"
+                  }
+                ],
+                "id": 9,
+                "name": "VariableDeclaration",
+                "src": "274:12:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "groupId",
+                  "overrides": null,
+                  "scope": 12,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint8",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint8",
+                      "type": "uint8"
+                    },
+                    "id": 10,
+                    "name": "ElementaryTypeName",
+                    "src": "296:5:0"
+                  }
+                ],
+                "id": 11,
+                "name": "VariableDeclaration",
+                "src": "296:13:0"
+              }
+            ],
+            "id": 12,
+            "name": "StructDefinition",
+            "src": "199:117:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "IMasterMex.GroupInfo",
+              "name": "GroupInfo",
+              "scope": 56,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "total",
+                  "overrides": null,
+                  "scope": 27,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 13,
+                    "name": "ElementaryTypeName",
+                    "src": "349:7:0"
+                  }
+                ],
+                "id": 14,
+                "name": "VariableDeclaration",
+                "src": "349:13:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "deposit",
+                  "overrides": null,
+                  "scope": 27,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 15,
+                    "name": "ElementaryTypeName",
+                    "src": "372:7:0"
+                  }
+                ],
+                "id": 16,
+                "name": "VariableDeclaration",
+                "src": "372:15:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "profit",
+                  "overrides": null,
+                  "scope": 27,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 17,
+                    "name": "ElementaryTypeName",
+                    "src": "397:7:0"
+                  }
+                ],
+                "id": 18,
+                "name": "VariableDeclaration",
+                "src": "397:14:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "loss",
+                  "overrides": null,
+                  "scope": 27,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 19,
+                    "name": "ElementaryTypeName",
+                    "src": "421:7:0"
+                  }
+                ],
+                "id": 20,
+                "name": "VariableDeclaration",
+                "src": "421:12:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "shareProfitPerETH",
+                  "overrides": null,
+                  "scope": 27,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 21,
+                    "name": "ElementaryTypeName",
+                    "src": "443:7:0"
+                  }
+                ],
+                "id": 22,
+                "name": "VariableDeclaration",
+                "src": "443:25:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "extra",
+                  "overrides": null,
+                  "scope": 27,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 23,
+                    "name": "ElementaryTypeName",
+                    "src": "478:7:0"
+                  }
+                ],
+                "id": 24,
+                "name": "VariableDeclaration",
+                "src": "478:13:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "hasNegativeProfit",
+                  "overrides": null,
+                  "scope": 27,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "bool",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "bool",
+                      "type": "bool"
+                    },
+                    "id": 25,
+                    "name": "ElementaryTypeName",
+                    "src": "501:4:0"
+                  }
+                ],
+                "id": 26,
+                "name": "VariableDeclaration",
+                "src": "501:22:0"
+              }
+            ],
+            "id": 27,
+            "name": "StructDefinition",
+            "src": "322:208:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "IMasterMex.PoolInfo",
+              "name": "PoolInfo",
+              "scope": 56,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "tokenUniPair",
+                  "overrides": null,
+                  "scope": 40,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "stateMutability": "nonpayable",
+                      "type": "address"
+                    },
+                    "id": 28,
+                    "name": "ElementaryTypeName",
+                    "src": "562:7:0"
+                  }
+                ],
+                "id": 29,
+                "name": "VariableDeclaration",
+                "src": "562:20:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "priceRatio",
+                  "overrides": null,
+                  "scope": 40,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 30,
+                    "name": "ElementaryTypeName",
+                    "src": "592:4:0"
+                  }
+                ],
+                "id": 31,
+                "name": "VariableDeclaration",
+                "src": "592:15:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "minLeverage",
+                  "overrides": null,
+                  "scope": 40,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint8",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint8",
+                      "type": "uint8"
+                    },
+                    "id": 32,
+                    "name": "ElementaryTypeName",
+                    "src": "617:5:0"
+                  }
+                ],
+                "id": 33,
+                "name": "VariableDeclaration",
+                "src": "617:17:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "maxLeverage",
+                  "overrides": null,
+                  "scope": 40,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint8",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint8",
+                      "type": "uint8"
+                    },
+                    "id": 34,
+                    "name": "ElementaryTypeName",
+                    "src": "644:5:0"
+                  }
+                ],
+                "id": 35,
+                "name": "VariableDeclaration",
+                "src": "644:17:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "groups",
+                  "overrides": null,
+                  "scope": 40,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "mapping(uint8 => struct IMasterMex.GroupInfo)",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "type": "mapping(uint8 => struct IMasterMex.GroupInfo)"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint8",
+                          "type": "uint8"
+                        },
+                        "id": 36,
+                        "name": "ElementaryTypeName",
+                        "src": "679:5:0"
+                      },
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "GroupInfo",
+                          "referencedDeclaration": 27,
+                          "type": "struct IMasterMex.GroupInfo"
+                        },
+                        "id": 37,
+                        "name": "UserDefinedTypeName",
+                        "src": "688:9:0"
+                      }
+                    ],
+                    "id": 38,
+                    "name": "Mapping",
+                    "src": "671:27:0"
+                  }
+                ],
+                "id": 39,
+                "name": "VariableDeclaration",
+                "src": "671:34:0"
+              }
+            ],
+            "id": 40,
+            "name": "StructDefinition",
+            "src": "536:176:0"
+          },
+          {
+            "attributes": {
+              "constant": true,
+              "mutability": "constant",
+              "name": "UP",
+              "overrides": null,
+              "scope": 56,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint8",
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint8",
+                  "type": "uint8"
+                },
+                "id": 41,
+                "name": "ElementaryTypeName",
+                "src": "718:5:0"
+              },
+              {
+                "attributes": {
+                  "argumentTypes": null,
+                  "hexvalue": "31",
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "lValueRequested": false,
+                  "subdenomination": null,
+                  "token": "number",
+                  "type": "int_const 1",
+                  "value": "1"
+                },
+                "id": 42,
+                "name": "Literal",
+                "src": "738:1:0"
+              }
+            ],
+            "id": 43,
+            "name": "VariableDeclaration",
+            "src": "718:21:0"
+          },
+          {
+            "attributes": {
+              "constant": true,
+              "mutability": "constant",
+              "name": "DOWN",
+              "overrides": null,
+              "scope": 56,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint8",
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint8",
+                  "type": "uint8"
+                },
+                "id": 44,
+                "name": "ElementaryTypeName",
+                "src": "745:5:0"
+              },
+              {
+                "attributes": {
+                  "argumentTypes": null,
+                  "hexvalue": "30",
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "lValueRequested": false,
+                  "subdenomination": null,
+                  "token": "number",
+                  "type": "int_const 0",
+                  "value": "0"
+                },
+                "id": 45,
+                "name": "Literal",
+                "src": "767:1:0"
+              }
+            ],
+            "id": 46,
+            "name": "VariableDeclaration",
+            "src": "745:23:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "functionSelector": "313ce567",
+              "mutability": "mutable",
+              "name": "decimals",
+              "overrides": null,
+              "scope": 56,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint256",
+                  "type": "uint256"
+                },
+                "id": 47,
+                "name": "ElementaryTypeName",
+                "src": "774:7:0"
+              },
+              {
+                "attributes": {
+                  "argumentTypes": null,
+                  "hexvalue": "3138",
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "lValueRequested": false,
+                  "subdenomination": null,
+                  "token": "number",
+                  "type": "int_const 18",
+                  "value": "18"
+                },
+                "id": 48,
+                "name": "Literal",
+                "src": "800:2:0"
+              }
+            ],
+            "id": 49,
+            "name": "VariableDeclaration",
+            "src": "774:28:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "functionSelector": "5a2f3d09",
+              "mutability": "mutable",
+              "name": "poolInfo",
+              "overrides": null,
+              "scope": 56,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "struct IMasterMex.PoolInfo",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "PoolInfo",
+                  "referencedDeclaration": 40,
+                  "type": "struct IMasterMex.PoolInfo"
+                },
+                "id": 50,
+                "name": "UserDefinedTypeName",
+                "src": "809:8:0"
+              }
+            ],
+            "id": 51,
+            "name": "VariableDeclaration",
+            "src": "809:24:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "functionSelector": "1959a002",
+              "mutability": "mutable",
+              "name": "userInfo",
+              "overrides": null,
+              "scope": 56,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(address => struct IMasterMex.UserInfo)",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(address => struct IMasterMex.UserInfo)"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
+                    },
+                    "id": 52,
+                    "name": "ElementaryTypeName",
+                    "src": "847:7:0"
+                  },
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "UserInfo",
+                      "referencedDeclaration": 12,
+                      "type": "struct IMasterMex.UserInfo"
+                    },
+                    "id": 53,
+                    "name": "UserDefinedTypeName",
+                    "src": "858:8:0"
+                  }
+                ],
+                "id": 54,
+                "name": "Mapping",
+                "src": "839:28:0"
+              }
+            ],
+            "id": 55,
+            "name": "VariableDeclaration",
+            "src": "839:44:0"
+          }
+        ],
+        "id": 56,
+        "name": "ContractDefinition",
+        "src": "164:722:0"
+      }
+    ],
+    "id": 57,
+    "name": "SourceUnit",
+    "src": "33:853:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.0+commit.9e61f92b.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.3",
+  "updatedAt": "2021-01-22T09:24:57.692Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
